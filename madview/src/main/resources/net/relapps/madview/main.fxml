@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox xmlns:fx="http://javafx.com/fxml/1"
+      prefHeight="650.0" prefWidth="750.0"
+      xmlns="http://javafx.com/javafx/18"
+      fx:id="vbox"
+      fx:controller="net.relapps.madview.cntrl.MainController">
+    <children>
+        <MenuBar VBox.vgrow="NEVER">
+            <menus>
+                <Menu mnemonicParsing="false" text="File">
+                    <items>
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem mnemonicParsing="false" text="Open…" accelerator="Shortcut+O" onAction="#openDocument" />
+<!--                        <Menu mnemonicParsing="false" text="Open Recent" />-->
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem mnemonicParsing="false" text="Close" onAction="#closeDocument"  />
+                        <MenuItem mnemonicParsing="false" text="Save" accelerator="Shortcut+S" onAction="#save"/>
+                        <MenuItem mnemonicParsing="false" text="Save As…" onAction="#saveAs"/>
+<!--                        <MenuItem mnemonicParsing="false" text="Revert" onAction="#revertDocument" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem mnemonicParsing="false" text="Preferences…" />-->
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem mnemonicParsing="false" text="Quit" onAction="#quitApplication"/>
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Edit">
+                    <items>
+                        <MenuItem fx:id="btnOpenEditor" mnemonicParsing="false" text="Open editor" onAction="#openEditor" />
+                        <MenuItem fx:id="btnCloseEditor" mnemonicParsing="false" text="Close editor" onAction="#closeEditor" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                    <items>
+                        <MenuItem fx:id="btnAbout" mnemonicParsing="false" text="About MyHelloApp" onAction="#openAbout"/>
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+
+        <fx:include source="htmlviewer.fxml" VBox.vgrow="ALWAYS" fx:id="htmlViewer">
+        </fx:include>
+    </children>
+</VBox>

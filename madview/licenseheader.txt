@@ -1,0 +1,18 @@
+<#if licenseFirst??>
+${licenseFirst}
+</#if>
+${licensePrefix}Copyright(c) ${date?date?string("yyyy")} RELapps.net
+${licensePrefix}https://relapps.net
+${licensePrefix}
+${licensePrefix}This source code is free software; you can redistribute it and/or
+${licensePrefix}modify it under the terms of the GNU General Public License
+${licensePrefix}version 2 as published by the Free Software Foundation.
+${licensePrefix}
+${licensePrefix}This source code is distributed in the hope that it will be useful,
+${licensePrefix}but WITHOUT ANY WARRANTY; without even the implied warranty of
+${licensePrefix}MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+${licensePrefix}GNU General Public License for more details.
+${licensePrefix}https://github.com/rmtron/madview/blob/main/LICENSE
+<#if licenseLast??>
+${licenseLast}
+</#if>

@@ -1,0 +1,42 @@
+pre {
+    border: 1px solid #004900;
+}
+
+h1 {
+    color: rgb(67, 85, 89);
+    font-size: 150%;
+    margin-left: 0.1em;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+h2 {
+    color: rgb(67, 85, 89);
+    font-family: 'Roboto', sans-serif;
+    font-style: italic;
+    font-size: 135%;
+    margin-left: 0.1em;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+h3 {
+    color: rgb(67, 85, 89);
+    font-family: 'Roboto', sans-serif;
+    font-style: italic;
+    font-size: 115%;
+    margin-left: 0.1em;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+ul {
+    list-style-type: circle;
+}
+
+p {
+    margin-left: 0.1em;
+    margin-right: 0.1em;
+    margin-top: 0em;
+    margin-bottom: 0.5em;
+}
