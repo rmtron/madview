@@ -14,7 +14,7 @@
  */
 package net.relapps.madview.main;
 
-import relapps.lib.misc.AbstractVersion;
+import net.relapps.madview.lib.AbstractVersion;
 
 /**
  * Handles version information.

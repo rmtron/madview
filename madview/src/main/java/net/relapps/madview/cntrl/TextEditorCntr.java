@@ -25,7 +25,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Font;
 import net.relapps.fx.Loader;
-import relapps.exif.misc.IListener;
+import net.relapps.madview.lib.IListener;
 
 /**
  * Text editor controller.

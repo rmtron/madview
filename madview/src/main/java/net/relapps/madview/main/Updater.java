@@ -16,7 +16,7 @@ package net.relapps.madview.main;
 
 import java.util.Timer;
 import java.util.TimerTask;
-import relapps.exif.misc.IListener;
+import net.relapps.madview.lib.IListener;
 
 /**
  * Handle updates in a specified interval.

@@ -35,11 +35,11 @@ import javafx.stage.Window;
 import javafx.stage.WindowEvent;
 import net.relapps.fx.Loader;
 import net.relapps.fx.StdDialogs;
+import net.relapps.madview.lib.TextFileReader;
+import net.relapps.madview.lib.TextFileWriter;
 import net.relapps.madview.main.Updater;
 import net.relapps.madview.main.Version;
 import net.relapps.madview.md.MarkdownMgr;
-import relapps.lib.fileutils.TextFileReader;
-import relapps.lib.fileutils.TextFileWriter;
 
 /**
  *

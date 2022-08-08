@@ -30,12 +30,6 @@
             <artifactId>flexmark-all</artifactId>
             <version>0.62.2</version>
         </dependency>
-        <dependency>
-            <groupId>relapps</groupId>
-            <artifactId>rafc</artifactId>
-            <version>1.0</version>
-            <type>jar</type>
-        </dependency>
     </dependencies>
     <build>
         <plugins>

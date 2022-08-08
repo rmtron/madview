@@ -15,7 +15,6 @@
 package net.relapps.madview.cntrl;
 
 import javafx.application.Platform;
-import javafx.event.Event;
 import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;

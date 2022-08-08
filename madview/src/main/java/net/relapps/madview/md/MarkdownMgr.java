@@ -34,10 +34,10 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.Arrays;
 import net.relapps.fx.Loader;
+import net.relapps.madview.lib.FileUtils;
+import net.relapps.madview.lib.ISO8601;
 import net.relapps.madview.main.Main;
 import net.relapps.madview.main.Version;
-import relapps.lib.fileutils.FileUtils;
-import relapps.lib.misc.ISO8601;
 
 /**
  * Handles markdown.

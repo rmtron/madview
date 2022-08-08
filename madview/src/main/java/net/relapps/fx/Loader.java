@@ -22,9 +22,9 @@ import java.net.URLConnection;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
+import net.relapps.madview.lib.FileUtils;
+import net.relapps.madview.lib.TextFileReader;
 import net.relapps.madview.main.Main;
-import relapps.lib.fileutils.FileUtils;
-import relapps.lib.fileutils.TextFileReader;
 
 /**
  * Resource and FXML GUI loader.
