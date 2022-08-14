@@ -31,7 +31,15 @@ h3 {
 }
 
 ul {
+    list-style-type: "➢ "
+}
+
+ul li ul {
     list-style-type: circle;
+}
+
+ul li ul li ul {
+    list-style-type: "• " ;
 }
 
 p {
@@ -39,4 +47,11 @@ p {
     margin-right: 0.1em;
     margin-top: 0em;
     margin-bottom: 0.5em;
+}
+
+table, th, td {
+    border: 1px solid;
+    border-color: #ccc;
+    border-collapse: collapse;
+    padding: 0.2em;
 }
