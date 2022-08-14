@@ -51,6 +51,7 @@ public class Main {
 - [ ] Item #1
 - [x] Item #2 (checked)
 - [ ] Item #3
+  - [ ] Item #3.1
 
 ## Table
 | Col 1       | Col 2       | Col 3      |

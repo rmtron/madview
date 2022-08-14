@@ -56,9 +56,11 @@ module net.relapps.madview {
     requires flexmark.ext.wikilink;
     requires flexmark.ext.yaml.front.matter;
     requires flexmark.ext.youtube.embedded;
+    requires com.google.gson;
 
     opens net.relapps.madview to javafx.fxml;
     opens net.relapps.madview.cntrl to javafx.fxml;
+    opens net.relapps.madview.main to com.google.gson;
     exports net.relapps.madview.main;
     exports net.relapps.madview.cntrl;
 }

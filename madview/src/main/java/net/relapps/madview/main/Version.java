@@ -44,13 +44,14 @@ public class Version extends AbstractVersion {
      * @return The URL.
      */
     public String getVersionURL() {
-        return "https://relapps.net/ptrac/current.json";
+        return "https://relapps.net/madview/current.json";
     }
     private static final String COPYRIGHT = "© 2022 RELapps.net";
-    private static final String DATE = "26/JUN/2022";
+    private static final String DATE = "15/AUG/2022";
     private static final String DESCRIPTION = "Markdown viewer and editor";
     private static final String EMAIL = "info@relapps.net";
-    private static final String HOMEPAGE = "https://relapps.net";
+    private static final String HOMEPAGE
+            = "https://relapps.net/web/madview.html";
     private static final String NAME = "madview";
     private static final Integer[] VERSION = {0, 3};
     private static final String VERSION_SUFFIX = "";

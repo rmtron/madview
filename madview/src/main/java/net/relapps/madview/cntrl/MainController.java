@@ -37,6 +37,7 @@ import net.relapps.fx.Loader;
 import net.relapps.fx.StdDialogs;
 import net.relapps.madview.lib.TextFileReader;
 import net.relapps.madview.lib.TextFileWriter;
+import net.relapps.madview.main.GsAppVersion;
 import net.relapps.madview.main.Updater;
 import net.relapps.madview.main.Version;
 import net.relapps.madview.md.MarkdownMgr;
@@ -210,6 +211,7 @@ public class MainController { // implements EventHandler<Event> {
             });
             btnOpenEditor.setDisable(false);
             btnCloseEditor.setDisable(true);
+            checkForNewVersion();
         });
     }
 
@@ -265,6 +267,22 @@ public class MainController { // implements EventHandler<Event> {
         if (close) {
             _stage.close();
         }
+    }
+
+    private void checkForNewVersion() {
+        Platform.runLater(() -> {
+            var appVers = GsAppVersion.isNewVersionAvailable();
+            if (appVers != null) {
+
+                StringBuilder msg = new StringBuilder();
+                msg.append("Version ");
+                msg.append(appVers.getVersionString());
+                msg.append(" available for download at: ");
+                msg.append(appVers.getDownloadURL());
+                StdDialogs.showInfo(vbox, "New version available",
+                        "New version of madview available", msg.toString());
+            }
+        });
     }
 
     private boolean isModified() {
