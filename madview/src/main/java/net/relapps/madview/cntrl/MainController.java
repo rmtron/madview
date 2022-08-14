@@ -17,6 +17,8 @@ package net.relapps.madview.cntrl;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 import javafx.application.Platform;
 import javafx.event.EventType;
 import javafx.fxml.FXML;
@@ -270,19 +272,8 @@ public class MainController { // implements EventHandler<Event> {
     }
 
     private void checkForNewVersion() {
-        Platform.runLater(() -> {
-            var appVers = GsAppVersion.isNewVersionAvailable();
-            if (appVers != null) {
-
-                StringBuilder msg = new StringBuilder();
-                msg.append("Version ");
-                msg.append(appVers.getVersionString());
-                msg.append(" available for download at: ");
-                msg.append(appVers.getDownloadURL());
-                StdDialogs.showInfo(vbox, "New version available",
-                        "New version of madview available", msg.toString());
-            }
-        });
+        Timer timer = new Timer("Check for update", true);
+        timer.schedule(new TimerTaskImpl(), 1_000);
     }
 
     private boolean isModified() {
@@ -378,4 +369,28 @@ public class MainController { // implements EventHandler<Event> {
     private HtmlViewerController htmlViewerController;
     @FXML
     private VBox vbox;
+
+    private class TimerTaskImpl extends TimerTask {
+
+        TimerTaskImpl() {
+        }
+
+        @Override
+        public void run() {
+            var appVers = GsAppVersion.isNewVersionAvailable();
+            Platform.runLater(() -> {
+                if (appVers != null) {
+
+                    StringBuilder msg = new StringBuilder();
+                    msg.append("Version ");
+                    msg.append(appVers.getVersionString());
+                    msg.append(" available for download at: ");
+                    msg.append(appVers.getDownloadURL());
+                    StdDialogs.showInfo(vbox, "New version available",
+                            "New version of madview available", msg.
+                                    toString());
+                }
+            });
+        }
+    }
 }

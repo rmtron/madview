@@ -27,7 +27,7 @@ copy *.jar input
 copy libs\*.* input
 
 
-set modules=java.base,javafx.media,javafx.web,javafx.fxml,java.logging
+set modules=java.base,javafx.media,javafx.web,javafx.fxml,java.logging,jdk.crypto.ec
 echo "Use modules: %modules%"
 
 echo "Create Java runtime"
