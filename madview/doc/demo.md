@@ -47,7 +47,7 @@ public class Main {
 1. Item #2
 1. Item #3
 
-## Checkbox list
+## Checkbox list (task list
 - [ ] Item #1
 - [x] Item #2 (checked)
 - [ ] Item #3

@@ -107,10 +107,11 @@ public class GsAppVersion {
         gsver.setMajor(current.getMajor());
         gsver.setMinor(current.getMinor());
         gsver.setMicro(current.getMicro());
+        gsver.setVersionString(current.getVersion());
         gsver.setDownloadURL(current.getHomePage());
 
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        String json = gson.toJson(ver);
+        String json = gson.toJson(gsver);
         System.out.println(json);
 
         var newVersion = isNewVersionAvailable();
