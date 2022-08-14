@@ -42,7 +42,7 @@ cp libs/* input
 
 # echo "Modules found: $modules"
 # modules=$modules,javafx.base,java.logging,javafx.fxml,javafx.media,javafx.web
-modules=java.base,javafx.media,javafx.web,javafx.fxml,java.logging
+modules=java.base,javafx.media,javafx.web,javafx.fxml,java.logging,jdk.crypto.ec
 echo "Use modules: $modules"
 # echo "Modules found: $modules"
 
