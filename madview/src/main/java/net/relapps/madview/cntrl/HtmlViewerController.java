@@ -14,13 +14,21 @@
  */
 package net.relapps.madview.cntrl;
 
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.TransferMode;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
+import net.relapps.fx.StdDialogs;
 import net.relapps.fx.WebViewHelper;
 
 /**
@@ -38,7 +46,6 @@ public class HtmlViewerController implements Initializable {
     public String getHTML() {
         return _html;
     }
-    //extends Controller {
 
     /**
      * Initializes the controller class.
@@ -55,6 +62,32 @@ public class HtmlViewerController implements Initializable {
         WebEngine webEngine = htmlViewer.getEngine();
         webEngine.getLoadWorker().stateProperty().addListener(
                 new HyperLinkRedirectListener(htmlViewer));
+
+        htmlViewer.setOnDragOver((DragEvent event) -> {
+            if (event.getDragboard().hasString()) {
+                event.acceptTransferModes(TransferMode.COPY);
+            }
+            event.consume();
+        });
+
+        htmlViewer.setOnDragDropped((DragEvent event) -> {
+            Dragboard db = event.getDragboard();
+            if (db.hasFiles()) {
+                // Take the first file in case there are more files.
+                List<File> files = db.getFiles();
+                File file = files.get(0);
+                try {
+                    _mainCtrl.openDocument(file);
+                } catch (IOException ex) {
+                    StdDialogs.showException(htmlViewer, ex,
+                            "Error opening document.");
+                }
+                event.setDropCompleted(true);
+            } else {
+                event.setDropCompleted(false);
+            }
+            event.consume();
+        });
     }
 
     /**
@@ -77,7 +110,17 @@ public class HtmlViewerController implements Initializable {
             this._html = html;
         }
     }
+
+    /**
+     * Assign the main controller.
+     *
+     * @param mainCtrl The controller.
+     */
+    public void setMainController(MainController mainCtrl) {
+        _mainCtrl = mainCtrl;
+    }
     private String _html = null;
+    private MainController _mainCtrl = null;
     private WebViewHelper _webViewHelper = null;
     @FXML
     private WebView htmlViewer;

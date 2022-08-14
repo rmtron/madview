@@ -53,6 +53,6 @@ public class Version extends AbstractVersion {
     private static final String HOMEPAGE
             = "https://relapps.net/web/madview.html";
     private static final String NAME = "madview";
-    private static final Integer[] VERSION = {0, 3};
+    private static final Integer[] VERSION = {0, 4};
     private static final String VERSION_SUFFIX = "";
 }

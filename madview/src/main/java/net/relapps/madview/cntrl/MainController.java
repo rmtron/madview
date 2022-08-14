@@ -94,19 +94,27 @@ public class MainController { // implements EventHandler<Event> {
 
     @FXML
     public void openDocument() {
-        try {
-            FileChooser fileChooser = new FileChooser();
-            fileChooser.setTitle("Open document");
-            FileChooser.ExtensionFilter ef
-                    = FileType.MARKDOWN.getFilter();
-            fileChooser.getExtensionFilters().add(ef);
-            Window stage = StdDialogs.getWindow(vbox);
-            File file = fileChooser.showOpenDialog(stage);
-            if (file != null) {
-                openFile(file);
+        if (mayChangeDocument()) {
+            try {
+                FileChooser fileChooser = new FileChooser();
+                fileChooser.setTitle("Open document");
+                FileChooser.ExtensionFilter ef
+                        = FileType.MARKDOWN.getFilter();
+                fileChooser.getExtensionFilters().add(ef);
+                Window stage = StdDialogs.getWindow(vbox);
+                File file = fileChooser.showOpenDialog(stage);
+                if (file != null) {
+                    openFile(file);
+                }
+            } catch (IOException ex) {
+                StdDialogs.showException(vbox, ex, "Error opening document.");
             }
-        } catch (IOException ex) {
-            StdDialogs.showException(vbox, ex, "Error opening document.");
+        }
+    }
+
+    public void openDocument(File file) throws IOException {
+        if (mayChangeDocument()) {
+            openFile(file);
         }
     }
 
@@ -213,6 +221,7 @@ public class MainController { // implements EventHandler<Event> {
             });
             btnOpenEditor.setDisable(false);
             btnCloseEditor.setDisable(true);
+            htmlViewerController.setMainController(this);
             checkForNewVersion();
         });
     }
@@ -282,6 +291,17 @@ public class MainController { // implements EventHandler<Event> {
         } else {
             return _isModified;
         }
+    }
+
+    private boolean mayChangeDocument() {
+        boolean ret = true;
+        if (isModified()) {
+            ret = StdDialogs.showConfirmation(vbox,
+                    "Document changed",
+                    "Document changed",
+                    "Do you really want to discard the changes?");
+        }
+        return ret;
     }
 
     private void openFile(File file) throws IOException {
