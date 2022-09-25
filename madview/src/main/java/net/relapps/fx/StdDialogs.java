@@ -15,14 +15,17 @@
 package net.relapps.fx;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.PrintStream;
 import java.util.Optional;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Dialog;
 import javafx.scene.control.DialogPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.VBox;
@@ -133,6 +136,27 @@ public class StdDialogs {
             String message) {
         Alert alert = new Alert(AlertType.INFORMATION);
         showDialog(alert, parent, title, header, message);
+    }
+
+    /**
+     * Open a modal dialog.
+     *
+     * @param parent The dialog parent.
+     * @param dialogDef The dialogs FXML file name.
+     */
+    public static void showModalDialog(Node parent, String dialogDef) {
+        try {
+            Dialog<String> dialog = new Dialog<>();
+            DialogPane pane = dialog.getDialogPane();
+            Loader<Parent> loader = new Loader<>(dialogDef);
+            Parent parentNode = loader.getNode();
+            pane.setContent(parentNode);
+            dialog.initOwner(StdDialogs.getWindow(parent));
+            dialog.showAndWait();
+            dialog.close();
+        } catch (IOException ex) {
+            StdDialogs.showException(parent, ex, "Error opening dialog.");
+        }
     }
 
     /**

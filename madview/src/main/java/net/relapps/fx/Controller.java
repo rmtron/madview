@@ -14,17 +14,10 @@
  */
 package net.relapps.fx;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.event.EventHandler;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 
 /**
  * Dialog base class
@@ -85,20 +78,6 @@ public abstract class Controller implements Initializable {
     }
 
     /**
-     *
-     * @param clazz
-     */
-    @SuppressWarnings("CallToPrintStackTrace")
-    protected void createDialog(Class<?> clazz) {
-        try {
-            createDialogP(clazz);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            throw new RuntimeException(ex);
-        }
-    }
-
-    /**
      * Returns the stage.
      *
      * @return The stage.
@@ -107,75 +86,7 @@ public abstract class Controller implements Initializable {
         return _stage;
     }
 
-    private void createDialogP(Class<?> clazz) throws IOException {
-        String className = clazz.getName();
-        StringBuilder fxml = new StringBuilder();
-        fxml.append('/');
-        fxml.append(className.replace('.', '/'));
-        fxml.append(".fxml");
-
-        FXMLLoader fxmlLoader = new FXMLLoader(
-                getClass().getResource(fxml.toString()));
-
-        fxmlLoader.setController(this);
-        Parent root = (Parent) fxmlLoader.load();
-
-        // Scene scene = new Scene(root, 300, 250);
-        Scene scene = new Scene(root);
-
-        _stage = new Stage();
-
-        if (_modal && _parent != null) {
-            _stage.initModality(Modality.WINDOW_MODAL);
-        }
-        if (_parent != null) {
-            _stage.initOwner(_parent.getStage());
-            setLocationToParent();
-        }
-
-        _stage.setOnCloseRequest((WindowEvent e) -> {
-            e.consume();
-            closeRequest();
-        });
-        _stage.setScene(scene);
-    }
-
-    private void setLocationToParent() {
-        // Stage parentStage = parent.getStage();
-        Stage childStage = getStage();
-
-        PositionChildAction bar = new PositionChildAction();
-        childStage.setOnShown(bar);
-    }
     private final boolean _modal;
     private final Controller _parent;
     private Stage _stage;
-
-    private class PositionChildAction implements EventHandler<WindowEvent> {
-
-        PositionChildAction() {
-        }
-
-        @Override
-        public void handle(WindowEvent event) {
-            Stage childStage = getStage();
-
-            Double cw = childStage.getWidth();
-            Double ch = childStage.getHeight();
-
-            Stage parentStage = _parent.getStage();
-            Double pw = parentStage.getWidth();
-            Double ph = parentStage.getHeight();
-            Double px = parentStage.getX();
-            Double py = parentStage.getY();
-
-            double pxc = (pw / 2.0) + px;
-            double pyc = (ph / 2.0) + py;
-
-            double x = pxc - (cw / 2.0);
-            double y = pyc - (ch / 2.0);
-            childStage.setX(x);
-            childStage.setY(y);
-        }
-    }
 }

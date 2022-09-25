@@ -35,14 +35,18 @@ public class AboutController {
         _stage.close();
     }
 
+    public void openHomepage() {
+        OSUtilities.openURLInSystemBrowser(labelURL, _version.getHomePage());
+    }
+
     @FXML
     void initialize() {
         final String header = "About " + _version.getName();
         labelHeader.setText(header);
         labelApplication.setText(_version.getName());
-        labelCopyright.setText(_version.getCopyright()
-                + ", " + _version.getHomePage());
+        labelCopyright.setText(_version.getCopyright());
         labelVersion.setText(_version.getVersionString());
+        labelURL.setText(_version.getHomePage());
         Platform.runLater(() -> {
             Scene scene = labelHeader.getScene();
             _stage = (Stage) scene.getWindow();
@@ -62,6 +66,8 @@ public class AboutController {
     private Label labelCopyright;
     @FXML
     private Label labelHeader;
+    @FXML
+    private Label labelURL;
     @FXML
     private Label labelVersion;
 }

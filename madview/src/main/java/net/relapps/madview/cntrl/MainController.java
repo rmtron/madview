@@ -48,7 +48,7 @@ import net.relapps.madview.md.MarkdownMgr;
  *
  * @author RMT
  */
-public class MainController { // implements EventHandler<Event> {
+public class MainController {
 
     public MainController() {
     }
@@ -60,7 +60,6 @@ public class MainController { // implements EventHandler<Event> {
             close = StdDialogs.showConfirmation(vbox, "Quit",
                     "Document modified",
                     "Really close the document?");
-
         } else {
             close = true;
         }
@@ -77,19 +76,7 @@ public class MainController { // implements EventHandler<Event> {
 
     @FXML
     public void openAbout() {
-        try {
-            Dialog<String> dialog = new Dialog<>();
-            DialogPane pane = dialog.getDialogPane();
-            // DialogPane pane = new DialogPane();
-            Loader<Parent> loader = new Loader<>("aboutdlg");
-            Parent parent = loader.getNode();
-            pane.setContent(parent);
-            dialog.initOwner(StdDialogs.getWindow(vbox));
-            dialog.showAndWait();
-            dialog.close();
-        } catch (IOException ex) {
-            StdDialogs.showException(vbox, ex, "Error opening dialog.");
-        }
+        StdDialogs.showModalDialog(vbox, "aboutdlg");
     }
 
     @FXML

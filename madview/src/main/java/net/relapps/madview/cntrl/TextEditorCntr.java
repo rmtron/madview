@@ -48,6 +48,8 @@ public class TextEditorCntr {
 
     public void setText(String text) {
         textArea.setText(text);
+        int pos = 500;
+        textArea.selectRange(pos, pos + 20);
     }
 
     public void setUpdateListener(IListener listener) {

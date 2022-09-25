@@ -14,15 +14,10 @@
  */
 package net.relapps.madview.cntrl;
 
-import java.awt.Desktop;
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Worker;
 import javafx.scene.web.WebView;
-import net.relapps.fx.StdDialogs;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -59,43 +54,13 @@ public class HyperLinkRedirectListener implements ChangeListener<Worker.State>,
 
     @Override
     public void handleEvent(Event event) {
-        // TODO cleanup this method.
         if (event.getCurrentTarget() instanceof HTMLAnchorElement anchorElement) {
             event.preventDefault();
             String href = anchorElement.getHref();
-
-            if (Desktop.isDesktopSupported()) {
-                try {
-                    openLinkInSystemBrowser(href);
-                } catch (UnsupportedOperationException ex) {
-                    try {
-                        var proc = Runtime.getRuntime().exec("xdg-open " + href);
-                        proc.waitFor();
-                    } catch (IOException | InterruptedException ex2) {
-                    }
-
-                }
-            } else {
-                StdDialogs.showError(webView, "Error", "",
-                        "Not possible to open URL");
-                // xdg-open https://relapps.net/
-                try {
-                    var proc = Runtime.getRuntime().exec("xdg-open " + href);
-                    proc.waitFor();
-                } catch (IOException | InterruptedException ex) {
-                }
-            }
+            OSUtilities.openURLInSystemBrowser(webView, href);
         }
     }
 
-    private void openLinkInSystemBrowser(String url) {
-        try {
-            URI uri = new URI(url);
-            Desktop.getDesktop().browse(uri);
-        } catch (IOException | URISyntaxException e) {
-            StdDialogs.showException(webView, e, "Error opening URL");
-        }
-    }
     private static final String ANCHOR_TAG = "a";
     private static final String CLICK_EVENT = "click";
     private final WebView webView;
