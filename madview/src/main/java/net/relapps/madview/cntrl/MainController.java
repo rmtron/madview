@@ -23,10 +23,7 @@ import javafx.application.Platform;
 import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.geometry.Orientation;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Dialog;
-import javafx.scene.control.DialogPane;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.SplitPane;
 import javafx.scene.layout.Priority;
@@ -45,6 +42,7 @@ import net.relapps.madview.main.Version;
 import net.relapps.madview.md.MarkdownMgr;
 
 /**
+ * The application main controller.
  *
  * @author RMT
  */

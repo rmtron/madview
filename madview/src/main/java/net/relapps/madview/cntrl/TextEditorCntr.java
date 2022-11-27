@@ -14,6 +14,7 @@
  */
 package net.relapps.madview.cntrl;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.event.Event;
@@ -23,8 +24,11 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.Tooltip;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import net.relapps.fx.Loader;
+import net.relapps.fx.StdDialogs;
 import net.relapps.madview.lib.IListener;
 
 /**
@@ -34,12 +38,78 @@ import net.relapps.madview.lib.IListener;
  */
 public class TextEditorCntr {
 
+    @FXML
+    public void btnBoldPressed() {
+        editSelection("**", "**");
+    }
+
+    @FXML
+    public void btnBulletsPressed() {
+        editSelectionMLAdd("* ");
+    }
+
+    @FXML
+    public void btnCodeBlockPressed() {
+        editSelection("```\n", "```");
+    }
+
+    @FXML
+    public void btnHeader1Pressed() {
+        editSelectionAdd("# ");
+    }
+
+    @FXML
+    public void btnHeader2Pressed() {
+        editSelectionAdd("## ");
+    }
+
+    @FXML
+    public void btnHeader3Pressed() {
+        editSelectionAdd("### ");
+    }
+
+    @FXML
+    public void btnItalicPressed() {
+        editSelection("*", "*");
+    }
+
     public String getText() {
         return textArea.getText();
     }
 
+    @FXML
+    public void initialize() {
+        styleToolButton(btnBold, "bold.png", "Bold");
+        styleToolButton(btnItalic, "italic.png", "Italic");
+        styleToolButton(btnBullets, "bullets.png", "Bullets");
+        styleToolButton(btnHeader1, "header-1.png", "Header 1");
+        styleToolButton(btnHeader2, "header-2.png", "Header 2");
+        styleToolButton(btnHeader3, "header-3.png", "Header 3");
+        styleToolButton(btnCodeBlock, "codeblock.png",
+                "Preformatted clode block");
+        textArea.setFont(Font.font("monospace"));
+
+        // Create search panel.
+        try {
+            var loader = new Loader<HBox>("searchpanel");
+            var searchPanel = loader.getNode();
+            vbox.getChildren().add(searchPanel);
+        } catch (IOException ex) {
+            StdDialogs.showException(textArea, ex,
+                    "Failed loading search panel");
+        }
+    }
+
     public boolean isModified() {
         return _changed;
+    }
+
+    @FXML
+    public void keyPressed(KeyEvent ev) {
+    }
+
+    @FXML
+    public void keyReleased(KeyEvent ev) {
     }
 
     public void setModified(boolean flag) {
@@ -57,63 +127,7 @@ public class TextEditorCntr {
     }
 
     @FXML
-    void btnBoldPressed() {
-        editSelection("**", "**");
-    }
-
-    @FXML
-    void btnBulletsPressed() {
-        editSelectionMLAdd("* ");
-    }
-
-    @FXML
-    void btnCodeBlockPressed() {
-        editSelection("```\n", "```");
-    }
-
-    @FXML
-    void btnHeader1Pressed() {
-        editSelectionAdd("# ");
-    }
-
-    @FXML
-    void btnHeader2Pressed() {
-        editSelectionAdd("## ");
-    }
-
-    @FXML
-    void btnHeader3Pressed() {
-        editSelectionAdd("### ");
-    }
-
-    @FXML
-    void btnItalicPressed() {
-        editSelection("*", "*");
-    }
-
-    @FXML
-    void initialize() {
-        styleToolButton(btnBold, "bold.png", "Bold");
-        styleToolButton(btnItalic, "italic.png", "Italic");
-        styleToolButton(btnBullets, "bullets.png", "Bullets");
-        styleToolButton(btnHeader1, "header-1.png", "Header 1");
-        styleToolButton(btnHeader2, "header-2.png", "Header 2");
-        styleToolButton(btnHeader3, "header-3.png", "Header 3");
-        styleToolButton(btnCodeBlock, "codeblock.png",
-                "Preformatted clode block");
-        textArea.setFont(Font.font("monospace"));
-    }
-
-    @FXML
-    void keyPressed(KeyEvent ev) {
-    }
-
-    @FXML
-    void keyReleased(KeyEvent ev) {
-    }
-
-    @FXML
-    void textChanged(Event ev) {
+    public void textChanged(Event ev) {
         if (_initialized) {
             _changed = true;
             if (_updateListener != null) {
@@ -245,4 +259,6 @@ public class TextEditorCntr {
     private Button btnItalic;
     @FXML
     private TextArea textArea;
+    @FXML
+    private VBox vbox;
 }

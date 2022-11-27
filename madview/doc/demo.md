@@ -66,4 +66,4 @@ public class Main {
 | Column left aligned | Column center aligned | Column right aligned |
 | :---                |    :----:             |          ---:        |
 | Left aligned        | Center aligned        | 12.50€               |
-| Description          | Text                  | 99.99€               |
+| Description         | Text                  | 99.99€               |
